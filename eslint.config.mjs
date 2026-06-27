@@ -18,11 +18,12 @@ export default [
     node: true,
   }),
   ...compat.plugins('react', 'jsx-a11y'),
-  { 
+  {
     files: ['**/*.jsx', '**/*.js'],
     rules: {
       'linebreak-style': 'off',
-      'react/function-component-definition': 'off'
+      'react/function-component-definition': 'off',
+      'no-console': ['error', { allow: ['info', 'warn', 'error'] }],
     }
   },
 ]
