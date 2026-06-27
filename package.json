@@ -1,0 +1,20 @@
+{
+  "name": "greenfield-net-monitor",
+  "version": "1.0.0",
+  "description": "Network Heartbeat Monitor: Monitor and diagnose your network server, set up real-time alerts based on tracked activity, diagnose problems, and more.",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sleeper-and-the-Insomniacs/greenfield-net-monitor.git"
+  },
+  "keywords": [],
+  "author": "Christian Fields, Devin Delgado, Garrin Costa Jr., and Claire Happel",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Sleeper-and-the-Insomniacs/greenfield-net-monitor/issues"
+  },
+  "homepage": "https://github.com/Sleeper-and-the-Insomniacs/greenfield-net-monitor#readme"
+}
