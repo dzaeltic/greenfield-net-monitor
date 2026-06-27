@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "Network Heartbeat Monitor: Monitor and diagnose your network server, set up real-time alerts based on tracked activity, diagnose problems, and more.",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "start": "node server/",
+    "start:dev": "nodemon server/",
+    "build": "webpack"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sleeper-and-the-Insomniacs/greenfield-net-monitor.git"
@@ -29,6 +33,7 @@
     "@babel/preset-env": "^8.0.2",
     "@babel/preset-react": "^8.0.1",
     "babel-loader": "^10.1.1",
+    "html-webpack-plugin": "^5.6.7",
     "nodemon": "^3.1.14",
     "webpack": "^5.108.1",
     "webpack-cli": "^7.1.0"
