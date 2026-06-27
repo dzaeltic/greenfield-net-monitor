@@ -6,3 +6,6 @@ node_modules
 
 # ignore dist
 client/dist
+
+#ignore package-lock
+package-lock.json
