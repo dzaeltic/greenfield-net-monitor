@@ -1,11 +1,14 @@
 const express = require('express');
 const path = require('path');
-const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
+const { createServer } = require('node:http');
+const { Server } = require('socket.io');
 const router = require('./routes/auth');
 
 const app = express();
+const server = createServer(app);
+const io = new Server(server);
 const port = 3000;
 
 app.use(express.static(path.join('client', 'dist')));
@@ -21,15 +24,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use('/oauth2', router);
 
-mongoose.connect('mongodb://127.0.0.1:27017/greenfield')
-  .then(() => {
-    console.info('Successfully connected to DB');
-  })
-  .catch((err) => {
-    console.error('Failed to connect to DB', err);
-  });
+app.get('/', (req, res) => {
+  res.sendFile('../client/src/index.html');
+});
 
-app.listen(port, () => {
+io.on('connection', (socket) => {
+  console.info('a user connected');
+  socket.on('disconnect', () => {
+    console.info('user disconnected');
+  });
+});
+
+server.listen(port, () => {
   console.info(`
     App listening on:
     - http://localhost:${port}
