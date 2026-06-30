@@ -4,7 +4,7 @@ const session = require('express-session');
 const passport = require('passport');
 const { createServer } = require('node:http');
 const { Server } = require('socket.io');
-const router = require('./routes/auth');
+const router = require('./routes/router');
 
 const app = express();
 const server = createServer(app);
@@ -22,7 +22,7 @@ app.use(session({
 app.use(passport.initialize());
 // need to add, other session is making session
 app.use(passport.session());
-app.use('/oauth2', router);
+app.use('/oauth2', router.auth);
 
 app.get('/', (req, res) => {
   res.sendFile('../client/src/index.html');

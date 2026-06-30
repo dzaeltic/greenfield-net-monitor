@@ -2,7 +2,6 @@ const process = require('node:process');
 const express = require('express');
 const path = require('path');
 const passport = require('passport');
-// potential syntax issue
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../db/schemas/users');
 
