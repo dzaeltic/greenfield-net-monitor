@@ -2,7 +2,8 @@ const process = require('node:process');
 const express = require('express');
 const path = require('path');
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20');
+// potential syntax issue
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../db/schemas/users');
 
 const router = express.Router();
@@ -30,6 +31,7 @@ passport.use(
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: 'http://localhost:3000/oauth2/redirect/google',
+      scope: ['profile', 'email'],
     },
 
     // { id: profile.id ,
@@ -39,7 +41,8 @@ passport.use(
       User.findOneAndUpdate(
         { googleId: profile.id },
         { googleId: profile.id },
-        { upsert: true, new: true },
+        // replaced deprecated value
+        { upsert: true, returnDocument: 'after' },
       )
         .then((user) => done(null, user))
         .catch((err) => {

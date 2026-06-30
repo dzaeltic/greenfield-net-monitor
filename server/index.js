@@ -10,9 +10,15 @@ const port = 3000;
 
 app.use(express.static(path.join('client', 'dist')));
 app.use(express.json());
-app.use(session({ secret: 'thisIsVerySecretSchenanigans' }));
+// adding more properties to session so sessions persist
+app.use(session({
+  secret: 'thisIsVerySecretSchenanigans',
+  resave: false,
+  saveUninitialized: false,
+}));
 app.use(passport.initialize());
-
+// need to add, other session is making session
+app.use(passport.session());
 app.use('/oauth2', router);
 
 mongoose.connect('mongodb://127.0.0.1:27017/greenfield')
