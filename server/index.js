@@ -5,6 +5,8 @@ const passport = require('passport');
 const { createServer } = require('node:http');
 const { Server } = require('socket.io');
 const router = require('./routes/router');
+const Monitors = require('./db/schemas/monitors');
+const startMonitoring = require('./services/startMonitors');
 
 const app = express();
 const server = createServer(app);
@@ -30,15 +32,16 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
   console.info('a user connected');
-  socket.join('monitor1');
-
   socket.on('disconnect', () => {
     console.info('user disconnected');
   });
 
-  setInterval(() => {
-    socket.to('monitor1').emit('ping');
-  }, 5000);
+  const userId = socket.request.user._id;
+  const monitors = Monitors.find({ userId });
+
+  monitors.forEach((monitor) => {
+    socket.join(`monitor: ${monitor._id}`);
+  });
 });
 
 server.listen(port, () => {
@@ -46,5 +49,7 @@ server.listen(port, () => {
     App listening on:
     - http://localhost:${port}
     - http://127.0.0.1:${port}
-  `);
+    `);
 });
+
+startMonitoring(io);
