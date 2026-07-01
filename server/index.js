@@ -14,6 +14,7 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server);
 const port = 3000;
+// adding more properties to session so sessions persist
 const sessionMiddleware = session({
   secret: 'thisIsVerySecretSchenanigans',
   resave: false,
@@ -22,10 +23,8 @@ const sessionMiddleware = session({
 
 app.use(express.static(path.join('client', 'dist')));
 app.use(express.json());
-// adding more properties to session so sessions persist
 app.use(sessionMiddleware);
 app.use(passport.initialize());
-// need to add, other session is making session
 app.use(passport.session());
 app.use('/oauth2', router.auth);
 io.use(sharedSession(sessionMiddleware, { autoSave: true }));
@@ -41,10 +40,11 @@ io.on('connection', (socket) => {
   });
 
   const userId = socket.request.user._id;
+
   Monitors.find({ userId })
     .then((monitors) => {
       monitors.forEach((monitor) => {
-        socket.join(`monitor: ${monitor.name}`);
+        socket.join(`monitor: ${monitor._id}`);
       });
     });
 });
