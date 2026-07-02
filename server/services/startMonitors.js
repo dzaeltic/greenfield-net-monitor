@@ -1,15 +1,15 @@
 const { Monitors } = require('../db');
 const pingUrl = require('./pingService');
 
-const runningMonitors = new Map();
+const activeMonitors = new Map();
 
 const stopMonitor = (id) => {
   const monitorId = id.toString();
-  const timer = runningMonitors.get(monitorId);
+  const timer = activeMonitors.get(monitorId);
 
   if (timer) {
     clearInterval(timer);
-    runningMonitors.delete(monitorId);
+    activeMonitors.delete(monitorId);
   }
 };
 
@@ -19,13 +19,13 @@ const scheduleMonitor = (monitor, io) => {
   const timer = setInterval(() => {
     pingUrl(monitor, io);
   }, monitor.interval * 1000);
-  runningMonitors.set(monitor._id.toString(), timer);
+  activeMonitors.set(monitor._id.toString(), timer);
 };
 
 const startMonitoring = (io) => {
   Monitors.find()
-    .then((activeMonitors) => {
-      activeMonitors.forEach((monitor) => {
+    .then((foundMonitors) => {
+      foundMonitors.forEach((monitor) => {
         scheduleMonitor(monitor, io);
       });
     })
