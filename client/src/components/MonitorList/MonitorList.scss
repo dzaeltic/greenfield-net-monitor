@@ -1,0 +1,50 @@
+@import "bulma/bulma";
+
+// custom colors
+$bg-dark-blue: #0d1937;
+$bg-light-blue: #80a8e7;
+$select-medium-blue: #27386d;
+$text-white: #f8fafc;
+
+.monitor-wrapper {
+  background-color: $bg-dark-blue !important;
+  border: 1px solid #bfc7d2;
+  border-radius: 24px;
+  max-width: 600px;
+  padding: 40px;
+
+  .input {
+    background-color: $bg-light-blue;
+    color: $text-white;
+    &::placeholder { color: rgba($text-white, 0.7); }
+  }
+
+  .button {
+    border-radius: 12px;
+    &.is-primary {
+      background-color: $bg-light-blue;
+      color: $text-white;
+    }
+    &.is-info {
+      background-color: $select-medium-blue;
+    }
+  }
+
+  .monitor-items {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    list-style: none;
+    padding: 0;
+
+    li {
+      background-color: $bg-light-blue;
+      color: $text-white;
+      border: 1px solid #334155;
+      
+      &:hover {
+        border-color: $select-medium-blue;
+      }
+    }
+  }
+}
