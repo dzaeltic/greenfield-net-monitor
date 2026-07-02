@@ -3,18 +3,18 @@ const express = require('express');
 const path = require('path');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const User = require('../db/schemas/users');
+const { Users } = require('../db');
 
 const router = express.Router();
 
 require('dotenv').config({ path: path.join('config', '.env') });
 
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user.googleId);
 });
 
 passport.deserializeUser((id, done) => {
-  User.findOne(
+  Users.findOne(
     { googleId: id },
   )
     .then((user) => done(null, user))
@@ -33,11 +33,8 @@ passport.use(
       scope: ['profile', 'email'],
     },
 
-    // { id: profile.id ,
-    // displayName: profile.displayName,
-    // emails: profile.emails[0].value }
     (accessToken, refreshToken, profile, done) => {
-      User.findOneAndUpdate(
+      Users.findOneAndUpdate(
         { googleId: profile.id },
         {
           googleId: profile.id,
@@ -64,5 +61,16 @@ router.get('/redirect/google', passport.authenticate('google', {
   failureRedirect: '/login',
   successRedirect: '/',
 }));
+
+router.get('/dev/login', (req, res) => {
+  Users.findOne({ googleId: '101463606319803782948' })
+    .then((user) => {
+      req.login(user, (err) => {
+        if (err) return res.status(500).json(err);
+        res.json({ message: 'logged in', user });
+      });
+    })
+    .catch((err) => res.status(500).json(err));
+});
 
 module.exports = router;

@@ -1,11 +1,25 @@
-const cron = require('node-cron');
-const Monitors = require('../db/schemas/monitors');
+const { Monitors } = require('../db');
 const pingUrl = require('./pingService');
 
+const runningMonitors = new Map();
+
+const stopMonitor = (id) => {
+  const monitorId = id.toString();
+  const timer = runningMonitors.get(monitorId);
+
+  if (timer) {
+    clearInterval(timer);
+    runningMonitors.delete(monitorId);
+  }
+};
+
 const scheduleMonitor = (monitor, io) => {
-  cron.schedule('* * * * *', () => {
+  stopMonitor(monitor.id);
+
+  const timer = setInterval(() => {
     pingUrl(monitor, io);
-  });
+  }, monitor.interval * 1000);
+  runningMonitors.set(monitor._id.toString(), timer);
 };
 
 const startMonitoring = (io) => {
@@ -20,4 +34,4 @@ const startMonitoring = (io) => {
     });
 };
 
-module.exports = startMonitoring;
+module.exports = { startMonitoring, scheduleMonitor, stopMonitor };

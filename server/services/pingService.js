@@ -14,11 +14,11 @@ const pingUrl = (monitor, io) => {
         statusCode: res.status,
       });
 
-      io.to(`monitor: ${monitor.name}`).emit(
+      io.to(`monitor: ${monitor._id}`).emit(
         'monitorStatus',
         {
           isConnected: true,
-          responseTime,
+          responseTime: `${responseTime}ms`,
         },
       );
     })
@@ -32,11 +32,11 @@ const pingUrl = (monitor, io) => {
         error: err.message,
       });
 
-      io.to(`monitor: ${monitor.name}`).emit(
+      io.to(`monitor: ${monitor._id}`).emit(
         'monitorStatus',
         {
           isConnected: false,
-          responseTime,
+          responseTime: `${responseTime}ms`,
         },
       );
     });

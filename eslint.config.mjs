@@ -30,6 +30,7 @@ export default [
       'react/function-component-definition': 'off',
       'no-console': ['error', { allow: ['info', 'warn', 'error'] }],
       'no-underscore-dangle': ['error', { allow: ['__filename', '__dirname', '_id'] }],
+      'consistent-return': 'warn',
       'import/no-extraneous-dependencies': 'off',
     },
   },
