@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server/",
     "start:dev": "nodemon server/",
+    "watch": "webpack --watch",
     "build": "webpack",
     "prepare": "husky",
     "lint": "npx lint-staged"
@@ -34,6 +35,8 @@
   "homepage": "https://github.com/Sleeper-and-the-Insomniacs/greenfield-net-monitor#readme",
   "dependencies": {
     "axios": "^1.18.1",
+    "bulma": "^1.0.4",
+    "chart.js": "^4.5.1",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "express-session": "^1.19.0",
@@ -44,6 +47,7 @@
     "passport-google-oauth20": "^2.0.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
+    "sass": "^1.101.0",
     "socket.io": "^4.8.3",
     "socket.io-client": "^4.8.3"
   },
@@ -51,7 +55,9 @@
     "@babel/core": "^8.0.1",
     "@babel/preset-env": "^8.0.2",
     "@babel/preset-react": "^8.0.1",
+    "@eslint/eslintrc": "^3.3.5",
     "babel-loader": "^10.1.1",
+    "css-loader": "^7.1.4",
     "eslint": "^8.57.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.32.0",
@@ -62,7 +68,10 @@
     "husky": "^9.1.7",
     "lint-staged": "^17.0.8",
     "nodemon": "^3.1.14",
+    "sass-loader": "^17.0.0",
+    "style-loader": "^4.0.0",
     "webpack": "^5.108.1",
-    "webpack-cli": "^7.1.0"
+    "webpack-cli": "^7.1.0",
+    "webpack-dev-server": "^5.2.5"
   }
 }

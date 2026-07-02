@@ -1,0 +1,25 @@
+/* 
+Main:
+
+this file is more of a main entry point that will collect each stylesheet and then combine 
+it into a final stylesheet for React.
+
+order really matters in here:
+  1. load variables 
+  2. load Bulma
+  3. load mixins
+  4. load any component styles
+
+*/
+
+// loding variables
+@use "variables";
+
+// loading Bulma
+@use "bulma/bulma";
+
+// loading mixins
+@use "mixins";
+
+// loading component styles
+@use "../MonitorList/MonitorList.scss"
