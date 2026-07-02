@@ -25,6 +25,7 @@ export default [
       'react/function-component-definition': 'off',
       'no-console': ['error', { allow: ['info', 'warn', 'error'] }],
       'no-underscore-dangle': 0,
+      'consistent-return': 'warn',
     },
   },
 ]
