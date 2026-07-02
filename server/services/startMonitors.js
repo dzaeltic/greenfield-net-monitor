@@ -1,5 +1,4 @@
-// const cron = require('node-cron');
-const Monitors = require('../db/schemas/monitors');
+const { Monitors } = require('../db');
 const pingUrl = require('./pingService');
 
 const runningMonitors = new Map();
@@ -35,4 +34,4 @@ const startMonitoring = (io) => {
     });
 };
 
-module.exports = startMonitoring;
+module.exports = { startMonitoring, scheduleMonitor, stopMonitor };
