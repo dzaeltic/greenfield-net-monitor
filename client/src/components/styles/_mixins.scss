@@ -1,0 +1,20 @@
+/* 
+Mixins:
+
+  from SASS: https://sass-lang.com/documentation/at-rules/mixin/
+  Mixins allow you to define styles that can be re-used throughout your stylesheet.
+  If you find yourself writing the same block of styling more than twice, turn it into a mixin.
+
+  things you might want to make a mixin:
+  - how you handle screen sizes
+  - alignment
+  - things that are visual effects- like if you have a very nice custom shadow box or
+    maybe you want to repeat the style of a boarder several times over
+
+    // an example- a mixin for easier flex centering
+    @mixin flex-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+*/
