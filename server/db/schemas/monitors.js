@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const monitorsSchema = new Schema({
-  name: { type: String, unique: true },
+  name: { type: String },
   interval: {
     type: Number,
     required: true,
